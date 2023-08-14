@@ -1,0 +1,121 @@
+
+<mat-card class="meeting-card">
+  <div class="row">
+    <div class="col">
+      <mat-card-header><mat-card-title>MINUTES</mat-card-title></mat-card-header>
+    </div>
+    <div class="col">
+      <mat-card-header><mat-card-title>
+        <!-- <button mat-mini-fab type="button"  aria-label="Example icon button with a home icon" class="d-block mr-0 ml-auto"> -->
+          <mat-icon style="margin-left: 500px; color: navy; background-color: white; font-size: 25px;" (click)="viewMinutes()">preview</mat-icon>
+        <!-- </button> -->
+      </mat-card-title></mat-card-header>
+    </div>
+  </div>
+  <br>
+  <mat-card-content>
+
+    <form [formGroup]="meetingForm" class="form-container">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input  type="time" matInput  placeholder="Start Time" formControlName="time">
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Project" formControlName="projectId">
+                <mat-option *ngFor="let item of projects$ | async" [value]="item.id">
+                  {{item.projectName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>User</mat-label>
+              <input matInput type="text" value ="{{currentUser}}"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Attendees" formControlName="atendees" multiple>
+                <mat-option *ngFor="let item of users" [value]="item.name">
+                  {{item.name | titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Agenda:</mat-label>
+              <textarea matInput formControlName="agenda"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Minutes:</mat-label>
+              <textarea matInput formControlName="minutes"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+    </form>
+  </mat-card-content>
+
+  <form [formGroup]="minutesDetailsForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-content>
+        <div>
+          <table formArrayName="details">
+            <table *ngFor="let quantity of details().controls; let i=index" [formGroupName]="i">
+              <tr>
+                <td>
+                  <mat-form-field appearance="fill" class="full-width">
+                    <input matInput placeholder="Description" formControlName="description">
+                  </mat-form-field>
+                </td>
+
+                <td style="width:50%">
+                  <mat-icon style="color: rgb(255, 0, 0); font-size: 25px; margin-top: 17px; margin-left: 75px;" (click)="removeMinute(i)">cancel</mat-icon>
+                </td>
+              </tr>
+            </table>
+            <tr>
+              <th>
+                <div>
+                  <mat-icon style="font-size: 25px; color: green;"(click)="addMinute()">add_box</mat-icon>
+                </div>
+              </tr>
+          </table>
+        </div>
+     </mat-card-content>
+
+    </mat-card>
+  </form>
+
+  <mat-card-actions>
+    <button  mat-raised-button color="primary" type="button" (click)="onSubmit()" [disabled]="!meetingForm.valid || !minutesDetailsForm.valid">SAVE</button>&nbsp;&nbsp;
+  </mat-card-actions>
+
+</mat-card>
+

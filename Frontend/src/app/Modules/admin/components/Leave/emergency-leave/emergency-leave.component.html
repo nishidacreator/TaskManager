@@ -1,0 +1,53 @@
+
+<form [formGroup]="leaveRequestForm">
+  <mat-card class="background">
+    <mat-card-content>
+
+      <div class="row">
+
+        <div class="col">
+          <mat-form-field appearance="fill">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="startDatePicker" formControlName="fromDate" placeholder="Choose start date">
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field appearance="fill">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="endDatePicker" formControlName="toDate" placeholder="Choose end date">
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill">
+              <mat-label>Reason</mat-label>
+              <textarea matInput formControlName="reason" placeholder="Enter reason"></textarea>
+              <!-- <mat-error *ngIf="leaveRequestForm.get('reason').hasError('required')">
+                Reason is required
+              </mat-error> -->
+            </mat-form-field>
+
+          </div>
+
+
+      </div>
+
+
+
+      <mat-card-actions>
+        <button *ngIf="!data.status" mat-raised-button (click)="submitForm()" [disabled]="!leaveRequestForm.valid">ADD</button>&nbsp;&nbsp;
+        <button *ngIf="data.status" mat-raised-button type="button" [disabled]="!leaveRequestForm.valid" (click)="editFunction()">UPDATE</button>&nbsp;&nbsp;
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</form>
+

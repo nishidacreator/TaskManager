@@ -1,0 +1,53 @@
+
+<form [formGroup]="traineeForm" (ngSubmit)="onSubmit()">
+  <mat-card class="background">
+    <div class="row">
+      <div class="col">
+        <mat-card-header>
+          <mat-card-title style="color: navy;"> TRAINEE </mat-card-title>
+        </mat-card-header>
+      </div>
+    </div>
+    <br><mat-card-content >
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="TraineeID" formControlName="traineeID">
+            <mat-error *ngIf="traineeForm.controls['traineeID'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Training Mode" formControlName="trainingMode" style="font-family: Montserrat; font-size: 1em;">
+            <mat-option *ngFor="let item of modes" [value]="item.name">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Training Periods" formControlName="trainingPeriod" style="font-family: Montserrat; font-size: 1em;">
+            <mat-option *ngFor="let item of periods" [value]="item.name">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+
+    <br><mat-card-actions>
+      <button mat-raised-button  type="submit" [disabled]="!traineeForm.valid">
+        <span class="material-icons" style="font-size: 25px;">save</span>
+      </button>&nbsp;&nbsp;
+      &nbsp;<button mat-button mat-dialog-close (click)="onCancelClick()">No</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+

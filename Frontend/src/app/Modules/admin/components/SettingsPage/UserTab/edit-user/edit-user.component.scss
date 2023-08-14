@@ -1,0 +1,43 @@
+h1{
+  font-family: "Montserrat", "sans-serif";
+  color: #7ed386;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  margin-bottom: 35px;
+}
+
+.full-width{
+  width: 100%;
+  border: 0;
+  font-family: "Montserrat", "sans-serif";
+  font-size: 1em;
+  padding: 7px 0;
+  color: #070707;
+  outline: none;
+}
+
+
+.row {
+  display: flex;
+  flex-direction: row;
+  }
+
+  .col {
+  flex: 1;
+  margin-right: 20px;
+  }
+
+  .col:last-child {
+  margin-right: 0;
+  }
+
+  mat-icon:hover{
+    background-color: #f2f3f5;
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+
+  button:enabled {
+    background-color :#FFD662FF;;
+    color : white
+  }
