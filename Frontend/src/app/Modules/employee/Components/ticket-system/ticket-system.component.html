@@ -1,0 +1,86 @@
+<mat-toolbar class="#fca5a5">
+  <p > ADD YOUR TICKETS HERE</p>
+</mat-toolbar>
+
+<form [formGroup]="ticketForm"  novalidate  (ngSubmit)="onSubmit()">
+  <mat-card class="background">
+    <mat-card-content>
+      <div class="row">
+          <mat-form-field appearance="fill" class="full-width">
+            <input matInput   placeholder="Title" formControlName="title">
+          </mat-form-field>
+      </div>
+
+
+  <div class="row">
+  <div class="col">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Select Task</mat-label>
+    <mat-select formControlName="taskId">
+      <mat-option *ngFor="let item of task" [value]="item.id">
+        {{item.description}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-form-field  appearance="fill" class="full-width">
+      <textarea matInput formControlName="description" placeholder="Description"></textarea>
+    </mat-form-field>
+    </div>
+  </div>
+      <div class="row">
+          <label for="file">Attach your File:</label><br><br>
+          <input type="file" id="file" (change)="onFileChange($event)">
+      </div>
+
+        <mat-card-actions>
+          <button *ngIf="!isEdit" mat-raised-button type="submit" [disabled]="!ticketForm.valid">ADD</button>&nbsp;&nbsp;
+          <button *ngIf="isEdit" mat-raised-button type="button" [disabled]="!ticketForm.valid" (click)="edit()">UPDATE</button>&nbsp;&nbsp;
+        </mat-card-actions>
+      </mat-card-content>
+</mat-card>
+</form>
+
+
+
+<!--------------------------------------------Table starts------------------------------------------>
+
+<h2 class="registration-heading"> Submitted Tickets</h2>
+<table mat-table *ngIf="tickets" [dataSource]="tickets" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="ticketNo">
+       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ticket No</th>
+       <td mat-cell *matCellDef="let element">{{element.ticketNo}} </td>
+     </ng-container>
+
+     <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+
+  <ng-container matColumnDef="description">
+   <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+   <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+ </ng-container>
+
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+      </ng-container>
+
+
+     <ng-container matColumnDef="action" >
+      <th mat-header-cell class="aligncentr" *matHeaderCellDef><h3 class="mat-subheading-2 font-weight-bold">Manage</h3></th>
+       <td mat-cell *matCellDef="let row" >
+
+              <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+              <i  (click)="viewComment(row.id)" class="fa fa-eye" style="font-size: 20px; color:blue"></i> &nbsp;&nbsp;
+              <i   class="fa fa-edit" (click)="editFunction(row.id)" style="font-size: 20px; color:green"></i>
+              &nbsp;&nbsp;
+              <i  class="fa fa-trash" (click)="deleteRow(row.id)" style="font-size: 20px; color:red"></i>
+      </ng-container>
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>

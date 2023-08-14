@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form [formGroup]="loginForm">
+        <h3>Login Here</h3>
+
+        <label for="email">Email</label>
+        <input type="text" formControlName="email" id="email" placeholder="Email">
+
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="pass" placeholder="Pasword">
+
+        <button style="color: black;" (click)="submit()">Log In</button>
+        <div class="social">
+          <div class="go"><i class="fab fa-google"></i>  Google</div>
+          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+        </div>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<mat-card>
+  <mat-card-header *ngIf="trainee"><mat-card-title *ngIf="trainee.id == userId">MY PROFILE</mat-card-title></mat-card-header>
+  <mat-card>
+    <ul class="responsive-table" *ngIf="trainee">
+      <li class="table-header">
+        <div>Name : {{trainee.name}}</div>
+        <div>Email : {{trainee.email}}</div>
+        <div>Phone Number : {{trainee.phoneNumber}}</div>
+        <div> <mat-icon style="color: green;" (click)="editRow(trainee.id)">edit_note</mat-icon></div>
+      </li>
+
+      <li class="table-row">
+        <div>Date of Birth : {{trainee.dateOfBirth}}</div>
+        <div>Qualification : {{trainee.qualification}}</div>
+      </li>
+
+      <li class="table-row" *ngIf="trainee.status.toLowerCase()==='joined'">
+        <div>TraineeId : {{trainee.traineeID}}</div>
+        <div>Joining Date : {{trainee.startDate | date:'dd/MM/yyyy'}}</div>
+        <div>Training Period : {{trainee.trainingPeriod}}</div>
+        <div>Training Mode : {{trainee.trainingMode}}</div>
+      </li>
+    </ul>
+  </mat-card>
+
+  <br><mat-card>
+    <div class="row">
+      <div class="col">
+        <mat-card>
+
+          <mat-card-header>
+           <b> USER LANGUAGES</b>
+          </mat-card-header>
+
+          <table mat-table *ngIf="languages" [dataSource]="languages" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="table-border">ID</th>
+              <td mat-cell *matCellDef="let element" class="table-border"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="language" *ngIf="!editLngStat">
+              <th mat-header-cell *matHeaderCellDef class="table-border">Language</th>
+              <td mat-cell *matCellDef="let element" class="table-border"> {{element.language}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="yearOfExperience">
+              <th mat-header-cell *matHeaderCellDef class="table-border">Year Of Experience</th>
+              <td mat-cell *matCellDef="let element" class="table-border"> {{element.yearOfExperience}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="manage">
+              <th mat-header-cell *matHeaderCellDef>Manage</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon style="color: green;" (click)="editRowLang(element.id)">edit_note</mat-icon>
+                &nbsp;&nbsp;&nbsp;
+                <mat-icon style="color: red;" (click)="deleteRowLang(element.id)">delete_sweep</mat-icon>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <!--  -->
+          <form [formGroup]="languageForm" (ngSubmit)="onSubmitLang()">
+            <mat-card>
+              <mat-card-content>
+                <div>
+                  <table formArrayName="languages">
+                    <table *ngFor="let quantity of language().controls; let i=index" [formGroupName]="i">
+                      <tr>
+                        <td>
+                          <mat-form-field>
+                            <mat-label>Select an option</mat-label>
+                            <mat-select formControlName="language">
+                              <mat-form-field class="search-field">
+                                <div class="row">
+                                  <!-- <mat-icon>search</mat-icon> -->
+                                <input matInput (input)="filterOptions($event)" placeholder="Search">
+                                </div>
+                              </mat-form-field>
+                              <mat-option *ngFor="let option of filteredOptions" [value]="option.name">
+                                {{ option.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                        <td>
+                          <mat-form-field appearance="fill"class="full-width">
+                            <input matInput placeholder="Year Of Experience" formControlName="yearOfExperience">
+                          </mat-form-field>
+                        </td>
+
+                        <td>
+                          <span class="material-icons" style="color: rgb(255, 0, 0); font-size: 25px; margin-top: 17px; margin-left: 75px;" (click)="remove(i)">cancel</span>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </form>
+
+
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="editLanguageForm" *ngIf="editLngStat">
+                <mat-card>
+                  <mat-card-content>
+                    <div>
+                      <table>
+                        <table>
+                          <tr>
+                            <td>
+                              <mat-form-field>
+                                <mat-label>Select an option</mat-label>
+                                <mat-select formControlName="language">
+                                  <mat-form-field class="search-field">
+                                    <div class="row">
+                                      <!-- <mat-icon>search</mat-icon> -->
+                                    <input matInput (input)="filterOptions($event)" placeholder="Search">
+                                    </div>
+                                  </mat-form-field>
+                                  <mat-option *ngFor="let option of filteredOptions" [value]="option.name">
+                                    {{ option.name }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+
+                            <td>
+                              <mat-form-field appearance="fill"class="full-width">
+                                <input matInput placeholder="Year Of Experience" formControlName="yearOfExperience">
+                              </mat-form-field>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </table>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </form>
+            </div>
+          </div>
+
+          <!--  -->
+
+          <br><button mat-raised-button style="background-color: #95A5A6; margin-left: 8px; width: auto;" type="button" (click)="add()" *ngIf="!editLngStat">Add Language</button>
+          <br><button mat-raised-button style="background-color: #95A5A6; margin-left: 8px; width: auto;" type="button" *ngIf="editLngStat" (click)="editLanguage()">UPDATE</button>
+
+          <mat-card-actions *ngIf="status">
+            <button mat-raised-button class="btn btn-success" type="button" [disabled]="!languageForm.valid" (click)="onSubmitLang()">
+              <span class="material-icons" style="font-size: 25px;">save</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <div class="col">
+        <mat-card>
+          <mat-card-header>
+           <b> USER EXPERIENCES</b>
+          </mat-card-header>
+
+          <table mat-table *ngIf="experiences" [dataSource]="experiences" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="table-border">ID</th>
+              <td mat-cell *matCellDef="let element" class="table-border"> {{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="experience">
+              <th mat-header-cell *matHeaderCellDef class="table-border">Experience</th>
+              <td mat-cell *matCellDef="let element" class="table-border"> {{element.experience}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="yearOfExperience">
+              <th mat-header-cell *matHeaderCellDef class="table-border">Year Of Experience</th>
+              <td mat-cell *matCellDef="let element" class="table-border"> {{element.yearOfExperience}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="manage">
+              <th mat-header-cell *matHeaderCellDef>Manage</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon style="color: green;" (click)="editRowExp(element.id)">edit_note</mat-icon>
+                &nbsp;&nbsp;&nbsp;
+                <mat-icon style="color: red;" (click)="deleteRowExp(element.id)">delete_sweep</mat-icon>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsExp"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsExp;"></tr>
+          </table>
+
+          <form [formGroup]="experienceForm" (ngSubmit)="onSubmitExp()">
+            <mat-card>
+              <mat-card-content>
+                <div>
+                  <table formArrayName="experiences">
+                    <table *ngFor="let quantity of exp().controls; let i=index" [formGroupName]="i">
+                      <tr>
+                        <td>
+                          <mat-form-field appearance="fill"class="full-width">
+                            <input matInput placeholder="Experience" formControlName="experience">
+                          </mat-form-field>
+
+                        <td>
+                          <mat-form-field appearance="fill"class="full-width">
+                            <input matInput placeholder="Year Of Experience" formControlName="yearOfExperience">
+                          </mat-form-field>
+                        </td>
+
+                        <td>
+                          <span class="material-icons" style="color: rgb(255, 0, 0); font-size: 25px; margin-top: 17px; margin-left: 75px;" (click)="removeExp(i)">cancel</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </table>
+                </div>
+             </mat-card-content>
+            </mat-card>
+          </form>
+
+          <div class="row">
+            <div class="col"  *ngIf="editExpStat">
+              <form [formGroup]="editExperienceForm">
+                <mat-card>
+                  <mat-card-content>
+                    <div>
+
+                      <table>
+                        <table>
+                          <tr>
+                            <td>
+                              <mat-form-field appearance="fill"class="full-width">
+                                <input matInput placeholder="Experience" formControlName="experience">
+                              </mat-form-field>
+
+                            <td>
+                              <mat-form-field appearance="fill"class="full-width">
+                                <input matInput placeholder="Year Of Experience" formControlName="yearOfExperience">
+                              </mat-form-field>
+                            </td>
+                          </tr>
+                        </table>
+                      </table>
+                    </div>
+                </mat-card-content>
+                </mat-card>
+              </form>
+            </div>
+          </div>
+
+          <br><button mat-raised-button style="background-color: #95A5A6; margin-left: 8px;" type="button" (click)="addExp()" *ngIf="!editExpStat">Add Experience</button>
+          <br><button mat-raised-button style="background-color: #95A5A6; margin-left: 8px;" type="button" (click)="editExp()" *ngIf="editExpStat">UPDATE</button>
+          <mat-card-actions *ngIf="statusExp">
+            <button mat-raised-button class="btn btn-success" type="button" [disabled]="!experienceForm.valid" (click)="onSubmitExp()">
+              <span class="material-icons" style="font-size: 25px;">save</span>
+            </button>
+           </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
+</mat-card>

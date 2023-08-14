@@ -1,0 +1,80 @@
+mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  button[type="submit"] {
+    margin-top: 20px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .col {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .col:last-child {
+    margin-right: 0;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .form-heading {
+    background-color: #f2f2f2;
+    padding: 10px;
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .registration-heading {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .registration-subheading {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+
+
+  //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  mat-card {
+    width: 1300px;
+    margin: auto;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  mat-form-field {
+    margin-bottom: 16px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 34px;
+   text-align: center
+  }
+
+  mat-icon:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+  }

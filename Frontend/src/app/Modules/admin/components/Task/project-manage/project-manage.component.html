@@ -1,0 +1,215 @@
+
+
+
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  <mat-card class="background">
+    <mat-card-header><mat-card-title>PROJECT MANAGEMENT</mat-card-title></mat-card-header><br>
+    <mat-card-content >
+
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Project name" formControlName="projectName">
+            <mat-error *ngIf="projectForm.controls['projectName'].hasError('required')">
+              Project name <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Description" formControlName="description">
+            <mat-error *ngIf="projectForm.controls['description'].hasError('required')">
+              Description <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Client" formControlName="clientId">
+              <mat-option *ngFor="let item of clients$| async" [value]="item.id">
+                {{item.clientName}}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="rfqForm.controls['companyId'].hasError('required')">
+              Vendor <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+          <!-- <button (click)="manageCompany()"
+          class="material-icons" style=" color: rgb(10, 111, 189); font-size: 25px; margin-right: 3px;">edit_note
+           </button> -->
+        </div>
+      </div>
+
+        <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>startDate</mat-label>
+            <input formControlName="startDate" matInput [matDatepicker]="picker1">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>endDate</mat-label>
+          <input formControlName="endDate" matInput [matDatepicker]="picker2">
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Deadline: choose a date</mat-label>
+          <input formControlName="deadline" matInput [matDatepicker]="picker" [min]="minDate">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+</div>
+
+      <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="frontend" formControlName="frontend">
+          <mat-error *ngIf="projectForm.controls['frontend'].hasError('required')">
+            frontend <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="backend" formControlName="backend">
+          <mat-error *ngIf="projectForm.controls['backend'].hasError('required')">
+            backend <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="database" formControlName="database">
+          <mat-error *ngIf="projectForm.controls['database'].hasError('required')">
+            database <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+      <div class="row">
+
+      <div class="col">
+        <mat-form-field class="full-width">
+        <mat-select placeholder="status" formControlName="status">
+          <mat-option *ngFor="let item of  status" [value]="item.name">
+            {{item.name | titlecase}}
+          </mat-option>
+        </mat-select>
+
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="remarks" formControlName="remarks">
+          <mat-error *ngIf="projectForm.controls['remarks'].hasError('required')">
+            remarks <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button  mat-raised-button type="submit" [disabled]="!projectForm.valid">ADD</button>&nbsp;&nbsp;
+      <button  mat-raised-button type="button" (click)="onCancelClick()">CANCEL</button> -->
+
+        <button *ngIf ="!isEdit"  mat-raised-button color="primary" type="submit" [disabled]="!projectForm.valid">ADD</button>
+        <button *ngIf ="isEdit" mat-raised-button (click)="editFunction()" enable mat-raised-button color="primary" type="button">UPDATE</button>
+
+  <!-- <button *ngIf ="isEdit && !editAdminStatus" mat-raised-button (click)="editTherapistFunction()" enable mat-raised-button color="primary" type="button">UPDATE</button>
+      <button *ngIf ="isEdit && editAdminStatus" mat-raised-button (click)="editAdminFunction()" enable mat-raised-button color="primary" type="button">UPDATE</button> -->
+</mat-card-actions>
+  </mat-card>
+
+
+
+
+</form>
+
+
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+
+<table mat-table *ngIf="projects" [dataSource]="projects" class="mat-elevation-z8">
+  <ng-container matColumnDef="projectName">
+     <th mat-header-cell *matHeaderCellDef>projectName</th>
+     <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>description</th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+ </ng-container>
+ <ng-container matColumnDef="clientName">
+  <th mat-header-cell *matHeaderCellDef>clientName</th>
+  <td mat-cell *matCellDef="let element"> {{element.client.clientName}} </td>
+</ng-container>
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef>startDate</th>
+    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="endDate">
+  <th mat-header-cell *matHeaderCellDef>endDate</th>
+  <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+</ng-container>
+
+
+
+<ng-container matColumnDef="deadline">
+  <th mat-header-cell *matHeaderCellDef>deadline</th>
+  <td mat-cell *matCellDef="let element"> {{element.deadline}} </td>
+</ng-container>
+
+
+<ng-container matColumnDef="frontend">
+  <th mat-header-cell *matHeaderCellDef>frontend</th>
+  <td mat-cell *matCellDef="let element"> {{element.frontend}} </td>
+</ng-container>
+<ng-container matColumnDef="backend">
+  <th mat-header-cell *matHeaderCellDef>backend</th>
+  <td mat-cell *matCellDef="let element"> {{element.backend}} </td>
+</ng-container>
+<ng-container matColumnDef="database">
+  <th mat-header-cell *matHeaderCellDef>database</th>
+  <td mat-cell *matCellDef="let element"> {{element.database}} </td>
+</ng-container>
+<ng-container matColumnDef="status">
+  <th mat-header-cell *matHeaderCellDef>status</th>
+  <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+</ng-container>
+<ng-container matColumnDef="remarks">
+  <th mat-header-cell *matHeaderCellDef>remarks</th>
+  <td mat-cell *matCellDef="let element"> {{element.remarks}} </td>
+</ng-container>
+
+<!-- <ng-container matColumnDef="view">
+  <th mat-header-cell *matHeaderCellDef>View</th>
+  <td mat-cell *matCellDef="let element">
+    <mat-icon style="color: navy;" (click)="viewDetails(element.id)">launch</mat-icon>
+  </td>
+</ng-container> -->
+
+<ng-container matColumnDef="action">
+  <th mat-header-cell *matHeaderCellDef>Manage </th>
+  <td mat-cell *matCellDef="let element">
+    <mat-icon style="color: green;" (click)="editProject(element.id)">edit_note</mat-icon>
+      &nbsp;&nbsp;&nbsp;
+    <mat-icon style="color: red;" (click)="deleteProject(element.id)">delete_sweep</mat-icon>
+  </td>
+</ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

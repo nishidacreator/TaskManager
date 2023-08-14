@@ -1,0 +1,116 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <br>
+  <mat-card>
+    <mat-card-header *ngIf="trainee"><mat-card-title *ngIf="trainee.id == userId">MY PROFILE</mat-card-title></mat-card-header>
+    <mat-card-header *ngIf="trainee">
+      <mat-card-title *ngIf="trainee.id != userId"> USER </mat-card-title>
+    </mat-card-header>
+    <mat-card-content >
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Name" formControlName="name">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput disabled value="{{empId}}" style="color:black">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="email">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Qualification" formControlName="qualification">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label style="font-family: Montserrat; font-size: 1em;">Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="trainee">
+        <div class="col" *ngIf="trainee.status.toLowerCase() == 'joined'">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Training Mode" formControlName="trainingMode" style="font-family: Montserrat; font-size: 1em;">
+              <mat-option *ngFor="let item of modes" [value]="item.name">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col" *ngIf="trainee.status.toLowerCase() == 'joined'">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Training Periods" formControlName="trainingPeriod" style="font-family: Montserrat; font-size: 1em;">
+              <mat-option *ngFor="let item of periods" [value]="item.name">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button class="btn btn-success" type="button" [disabled]="!userForm.valid" (click)="onSubmit()">
+        <span class="material-icons" style="font-size: 25px;">save</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

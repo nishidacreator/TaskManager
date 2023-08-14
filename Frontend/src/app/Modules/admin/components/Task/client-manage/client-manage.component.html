@@ -1,0 +1,71 @@
+
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+  <mat-card class="background">
+
+    <mat-card-header><mat-card-title>CLIENT MANAGEMENT</mat-card-title></mat-card-header><br>
+    <mat-card-content >
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Client Name" formControlName="clientName">
+            <mat-error *ngIf="clientForm.controls['clientName'].hasError('required')">
+              client Name <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Contact" formControlName="mob">
+            <mat-error *ngIf="clientForm.controls['mob'].hasError('required')">
+              Contact is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="clientForm.controls['email'].hasError('required')">
+              Email id <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button *ngIf ="!isEdit" mat-raised-button type="submit" [disabled]="!clientForm.valid">ADD</button>&nbsp;&nbsp;
+      <button *ngIf ="isEdit" mat-raised-button (click)="editFunction()" enable mat-raised-button color="primary" type="button">UPDATE</button>
+  </mat-card-actions>
+ </mat-card>
+</form>
+<!-- ------------------------------------------------------------------------------------------------- -->
+
+<table mat-table *ngIf="clients" [dataSource]="clients" class="mat-elevation-z8">
+  <ng-container matColumnDef="clientName">
+    <th mat-header-cell *matHeaderCellDef>clientName</th>
+    <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+ </ng-container>
+  <ng-container matColumnDef="mob">
+     <th mat-header-cell *matHeaderCellDef>mob</th>
+     <td mat-cell *matCellDef="let element"> {{element.mob}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>email</th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="action">
+  <th mat-header-cell *matHeaderCellDef>Manage </th>
+  <td mat-cell *matCellDef="let element">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <i  (click)="editClient(element.id)"  class="fa fa-edit" style="font-size: 20px; color:rgb(0, 11, 128)"></i>
+    &nbsp;&nbsp;
+    <i  (click)="deleteClient(element.id)" class="fa fa-trash" style="font-size: 20px; color:rgb(199, 90, 90)"></i>
+  </td>
+</ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

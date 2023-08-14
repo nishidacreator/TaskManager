@@ -1,0 +1,56 @@
+<main class="main">
+
+  <header class="header">
+    <div class="menu">
+    </div>
+    <nav class="nav">
+      <span class="page-title text-lg"> Assigned Tasks</span>
+    </nav>
+  </header>
+  <section class="data-summary">
+
+    <div class="data-info bg-yellow">
+      <h6 class="data-info__heading">Pending Tasks</h6>
+      <div class="data-info__content">
+        <sup class="sup"></sup><span class="data-info__amount text-lg">{{assignedTaskCount}}</span>
+      </div>
+    </div>
+    <div class="data-info bg-blue">
+      <h6 class="data-info__heading">Completed Tasks</h6>
+      <div class="data-info__content">
+        <sup class="sup"></sup><span class="data-info__amount text-lg">{{completedTaskCount}}</span>
+      </div>
+    </div>
+
+    <div class="data-info data-info--light">
+      <h6 class="data-info__heading"*ngIf="mode === 'determinate'">Progress bar </h6>
+
+        <mat-slider class="example-margin"  [min]="0" [max]="totalTasks" [(ngModel)]="completedTasks">
+
+        </mat-slider>
+
+      <div class="data-info__tag">{{progressPercentage}} %</div>
+    </div>
+
+    <div class="data-info data-info--light">
+      <h6 class="data-info__heading">{{ currentDay }}</h6>
+      <div class="data-info__content">
+        <span class="data-info__amount text-lg">{{ currentDate}} </span>
+      </div>
+      <div class="data-info__tag">{{ currenttime | date: 'hh:mm:ss' }}</div>
+    </div>
+  </section>
+
+
+
+  <section class="data-body">
+    <ol class="gradient-list">
+      <li *ngFor="let item of tasks"> <strong>{{item.project.projectName}} : </strong> &nbsp;{{ item.description }} <br> Assigned By: <em>{{item.by.name}}</em> </li>
+    </ol>
+  </section>
+
+</main>
+
+
+
+

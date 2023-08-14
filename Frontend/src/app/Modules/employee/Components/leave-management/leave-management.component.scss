@@ -1,0 +1,67 @@
+  //------------------------------latest----------------------------------
+  mat-form-field {
+    width: 800%;
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+
+//------------------------------normal\
+.row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .col {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .col:last-child {
+    margin-right: 0;
+  }
+
+  .full-width {
+    width: 60%;
+  }
+
+  button:enabled {
+    background-color :#FFD662FF;;
+    color : white
+  }
+
+
+  // ----------------------------------------------------------------
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .stylish-card {
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  button {
+    align-self: flex-end;
+  }
+//
+i:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}

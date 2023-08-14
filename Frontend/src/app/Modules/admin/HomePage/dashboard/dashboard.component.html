@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<div class="row">
+  <div class="col-1">
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="UTF-8">
+        <title> TASK MANAGER </title>
+
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       </head>
+    <body>
+
+        <div class="home-content">
+          <div class="overview-boxes">
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Task</div>
+                <div class="number">{{completedTaskCount}}</div>
+                <div class="indicator">
+                  <i class='bx bx-up-arrow-alt'></i>
+                  <span class="text">Completed</span>
+                </div>
+              </div>
+              <i class='bx bx-cart-alt cart'></i>
+            </div>
+            <br>
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Task</div>
+                <div class="number">{{assignedTaskCount}}</div>
+                <div class="indicator">
+                  <i class='bx bx-down-arrow-alt'></i>
+                  <span class="text">pending</span>
+                </div>
+              </div>
+              <i class='bx bxs-cart-add cart two' ></i>
+            </div>
+            <br>
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Tickets</div>
+                <div class="number">{{ticketsCount}}</div>
+                <div class="indicator">
+                  <i class='bx bx-up-arrow-alt'></i>
+                  <span class="text">pending</span>
+                </div>
+              </div>
+              <i class='bx bx-cart cart three' ></i>
+            </div>
+            <br>
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total projects</div>
+                <div class="number">{{projectsCount}}</div>
+                <div class="indicator">
+                  <i class='bx bx-up-arrow-alt down'></i>
+                  <span class="text">on going</span>
+                </div>
+              </div>
+              <i class='bx bxs-cart-download cart four' ></i>
+            </div>
+          </div>
+
+
+
+
+    <!-- ------------------------------------------------------------------------------------------------- -->
+
+      </div>
+
+
+    </body>
+    </html>
+  </div>
+  <div class="col-2">
+
+    <main>
+      <ol class="gradient-list">
+        <li *ngFor="let item of tasks"> <strong>{{item.project.projectName}} : </strong> &nbsp;{{ item.description }} <br> Assigned By: <em>{{item.by.name}}</em> </li>
+      </ol>
+    </main>
+
+  </div>
+  </div>

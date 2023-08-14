@@ -1,0 +1,278 @@
+
+
+<h2 class="registration-heading">TRAINEE</h2>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-card class="background">
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="name" placeholder="Name" />
+            <mat-error *ngIf="form.controls['name'].hasError('required')">
+              Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Trainee Id" formControlName="traineeID">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label style="font-family: Montserrat; font-size: 1em;">Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="email" placeholder="Email" />
+            <mat-error *ngIf="form.controls['email'].hasError('required')">
+            Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="phoneNumber" placeholder="Phone Number" />
+              <mat-error *ngIf="form.controls['phoneNumber'].hasError('required')">
+              Phone Number is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Qualification" formControlName="qualification" style="font-family: Montserrat; font-size: 1em;">
+              <mat-option *ngFor="let item of  qualification" [value]="item.name">
+                {{item.name }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="form.controls['qualification'].hasError('required')">
+              <strong>required</strong>
+              </mat-error> -->
+
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Total Experience" formControlName="experience" style="font-family: Montserrat; font-size: 1em;">
+              <mat-option *ngFor="let item of  experience" [value]="item.name">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="form.controls['experience'].hasError('required')">
+                <strong>required</strong>
+                </mat-error> -->
+
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+              Name <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder=" Language Known" formControlName="languagesKnown" style="font-family: Montserrat; font-size: 1em;" multiple>
+            <mat-option *ngFor="let language of  languages" [value]="language.name">
+              {{ language.name }}
+            </mat-option>
+          </mat-select>
+
+         </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input style="font-family: Montserrat; font-size: 1em;" matInput formControlName="remarks" placeholder="Any notes" />
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Training Mode" formControlName="trainingMode" style="font-family: Montserrat; font-size: 1em;">
+              <mat-option *ngFor="let item of modes" [value]="item.name">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Training Periods" formControlName="trainingPeriod" style="font-family: Montserrat; font-size: 1em;">
+              <mat-option *ngFor="let item of periods" [value]="item.name">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <form [formGroup]="languageForm" (ngSubmit)="onSubmit()">
+            <mat-card class="full-width">
+              <mat-card-header>
+                USER LANGUAGES
+              </mat-card-header>
+              <mat-card-content>
+                <div>
+                  <table formArrayName="languages">
+                    <table *ngFor="let quantity of language().controls; let i=index" [formGroupName]="i">
+                      <tr>
+                        <td>
+                          <mat-form-field class="full-width">
+                            <mat-label>Select an option</mat-label>
+                            <mat-select formControlName="language">
+                              <mat-form-field class="search-field">
+                                <div class="row">
+                                  <!-- <mat-icon>search</mat-icon> -->
+                                <input matInput (input)="filterOptions($event)" placeholder="Search">
+                                </div>
+                              </mat-form-field>
+                              <mat-option *ngFor="let option of filteredOptions" [value]="option.name">
+                                {{ option.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                        <td>
+                          <mat-form-field appearance="fill"class="full-width">
+                            <input matInput placeholder="Year Of Experience" formControlName="yearOfExperience">
+                          </mat-form-field>
+                        </td>
+
+                        <td>
+                          <mat-icon style="color: rgb(255, 0, 0); font-size: 25px; margin-left: 75px;" (click)="remove(i)">cancel</mat-icon>
+                        </td>
+                      </tr>
+                    </table>
+                    <tr>
+                      <th>
+                        <div>
+                          <mat-icon style="font-size: 25px; color: green;" (click)="add()">add_to_photos</mat-icon>
+                          <!-- <span class="material-icons" style="font-size: 25px; color: green;"(click)="add()">add_box</span> -->
+                        </div>
+                      </tr>
+                  </table>
+                </div>
+             </mat-card-content>
+
+            </mat-card>
+          </form>
+        </div>
+
+        <div class="col">
+          <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
+            <mat-card class="full-width">
+              <mat-card-header>
+                USER EXPERIENCES
+              </mat-card-header>
+
+              <mat-card-content>
+                <div>
+
+                  <table formArrayName="experiences">
+                    <table *ngFor="let quantity of exp().controls; let i=index" [formGroupName]="i">
+                      <tr>
+                        <td>
+                          <mat-form-field appearance="fill"class="full-width">
+                            <input matInput placeholder="Experience" formControlName="experience">
+                          </mat-form-field>
+
+                        <td>
+                          <mat-form-field appearance="fill"class="full-width">
+                            <input matInput placeholder="Year Of Experience" formControlName="yearOfExperience">
+                          </mat-form-field>
+                        </td>
+
+                        <td>
+                          <mat-icon style="color: rgb(255, 0, 0); font-size: 25px; margin-left: 75px;" (click)="removeExp(i)">cancel</mat-icon>
+
+                        </td>
+                      </tr>
+                    </table>
+                    <tr>
+                      <th>
+                        <div>
+                          <mat-icon style="font-size: 25px; color: green;" (click)="addExp()">add_to_photos</mat-icon>
+                        </div>
+                      </tr>
+                  </table>
+                </div>
+             </mat-card-content>
+            </mat-card>
+          </form>
+        </div>
+      </div>
+
+
+
+  <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button> -->
+
+</mat-card-content>
+
+<mat-card-actions>
+
+
+  <button class="button-container" mat-raised-button color="primary" type="submit" [disabled]="!form.valid || !experienceForm.valid || !languageForm.valid">Submit</button>
+</mat-card-actions>
+</mat-card>
+</form>
+
+
+
+<!-- <mat-card>
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Enter your name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Enter your password" />
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card> -->

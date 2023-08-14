@@ -1,0 +1,44 @@
+/* Assuming you have a common wrapper/container for all the comment cards */
+.comment-cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment-card {
+    width: 400px; /* Adjust the width according to your preference */
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f7f7f7;
+    width: 600px;
+    margin: 0 auto;/* Set your preferred background color */
+}
+
+.comment-card mat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333; /* Set your preferred title color */
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.commented-by {
+    font-size: 14px;
+    color: #666; /* Set your preferred commenter's name color */
+}
+
+.comment-date {
+    font-size: 14px;
+    color: #999; /* Set your preferred comment date color */
+}
+
+.comment-content {
+    font-size: 16px;
+    color: #444; /* Set your preferred comment text color */
+}

@@ -1,0 +1,15 @@
+
+<mat-card class="comment-card" *ngFor="let comment of comments; let i = index">
+  <mat-card-header>
+      <mat-card-title>Responses for your Ticket</mat-card-title>
+  </mat-card-header>
+  <br>
+  <br>
+  <div class="comment-header">
+      <span class="comment-content">Comment: {{ comment.comment}}</span>
+      <span class="comment-date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
+  </div>
+  <div class="commented-by">CommentedBy : {{ comment.commentedBy }}</div>
+</mat-card>
+<br>
+<br>

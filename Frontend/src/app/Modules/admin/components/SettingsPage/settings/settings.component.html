@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="leftbox">
+    <nav>
+      <a class="tab active" (click)="role()">
+        <mat-icon>security</mat-icon>
+      </a>
+
+      <a class="tab" (click)="user()">
+        <mat-icon>face</mat-icon>
+      </a>
+
+      <a class="tab" (click)="trainee()">
+        <mat-icon>child_care</mat-icon>
+      </a>
+
+      <a class="tab" (click)="attendance()">
+        <mat-icon>assignment</mat-icon>
+      </a>
+    </nav>
+  </div>
+
+  <div class="rightbox" *ngIf="updateRole">
+    <div class="profile tabShow">
+      <app-view-role></app-view-role>
+    </div>
+  </div>
+
+  <div class="rightbox" *ngIf="updateUser">
+    <div class="profile tabShow">
+      <app-view-user></app-view-user>
+    </div>
+  </div>
+
+  <div class="rightbox" *ngIf="updateTrainee">
+    <div class="profile tabShow">
+      <app-view-trainees></app-view-trainees>
+    </div>
+  </div>
+
+  <div class="rightbox" *ngIf="updateAttendance">
+    <div class="profile tabShow">
+      <app-view-attendance></app-view-attendance>
+    </div>
+  </div>
+</div>
