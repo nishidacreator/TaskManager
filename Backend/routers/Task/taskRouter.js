@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', async(req,res)=>{
   try{
-    const { projectId, description, assignedBy, assignedTo, assignedOn, deadline, status, remarks, traineeId } = req.body;
+    const { projectId, description, assignedBy, assignedTo, assignedOn, deadline, status, remarks } = req.body;
     const newTask = new Task({
         projectId: projectId,
         description : description,
@@ -15,8 +15,7 @@ router.post('/', async(req,res)=>{
         assignedOn: assignedOn,
         deadline : deadline,
         status: status,
-        remarks:remarks, 
-        traineeId: traineeId
+        remarks:remarks
     });
     await newTask.save();
 
@@ -31,7 +30,7 @@ res.send(newTask)
 
 router.get('/', async(req,res)=>{
   try {
-      const task = await Task.findAll({include: [Project, 'by', 'user', Trainee] });
+      const task = await Task.findAll({include: [Project, 'by', 'user'] });
       res.send(task);
       
   } catch (error) {

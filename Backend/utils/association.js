@@ -51,9 +51,6 @@ async function syncModel(){
     User.hasOne(Task,{foreignKey : 'assignedTo', onDelete : 'CASCADE', onUpdate : 'CASCADE'})
     Task .belongsTo(User, {as: 'user', foreignKey : 'assignedTo'})
 
-    Trainee.hasOne(Task,{foreignKey : 'traineeId', onDelete : 'CASCADE', onUpdate : 'CASCADE'})
-    Task .belongsTo(Trainee)
-
     User.hasMany(UserLanguage, { foreignKey: 'userId' });
     UserLanguage.belongsTo(User, { foreignKey: 'userId' });
 

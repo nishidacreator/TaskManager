@@ -43,8 +43,7 @@ export class TaskManageComponent {
     assignedOn:[''],
     deadline: ['', Validators.required],
     status:[''],
-    remarks:[''],
-    traineeId: ['']
+    remarks:['']
   });
 
   ngOnInit(): void {
@@ -96,8 +95,7 @@ export class TaskManageComponent {
       deadline:this.taskForm.get('deadline')?.value,
       status:'assigned',
       assignedOn: Date.now(),
-      remarks: this.taskForm.get('remarks')?.value,
-      traineeId: this.taskForm.get('traineeId')?.value
+      remarks: this.taskForm.get('remarks')?.value
     }
     this.adminService.addTask(data).subscribe((res)=>{
       console.log(res)

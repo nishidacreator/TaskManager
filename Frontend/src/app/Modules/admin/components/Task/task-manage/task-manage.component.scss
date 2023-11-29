@@ -47,3 +47,13 @@ i:hover{
   cursor: pointer;
   transform: scale(1.2);
 }
+
+@media(max-width:576px)
+{
+    .box{
+        padding: 0px;
+        margin: 0px;
+        display: flex;
+        flex-direction: column;
+    }
+}
