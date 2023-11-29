@@ -7,12 +7,11 @@ const Task = sequelize.define('task',
     projectId: {type: DataTypes.INTEGER, allowNull: false},
     description: {type: DataTypes.STRING},
     assignedBy: {type: DataTypes.INTEGER, allowNull: false},
-    assignedTo:{type: DataTypes.INTEGER, allowNull: true},
+    assignedTo:{type: DataTypes.INTEGER, allowNull: false},
     assignedOn:{type: DataTypes.DATEONLY, allowNull: false},
     deadline:{type: DataTypes.DATEONLY, allowNull: false},
     status: {type: DataTypes.STRING} ,
-    remarks: {type: DataTypes.STRING},
-    traineeId: {type: DataTypes.INTEGER, allowNull: true}
+    remarks: {type: DataTypes.STRING}
 },
 
 {

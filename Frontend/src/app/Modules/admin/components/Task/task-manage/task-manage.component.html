@@ -9,7 +9,7 @@
     <mat-card-content >
 
 
-      <div class="row">
+      <div class="row box">
         <div class="col">
           <mat-form-field class="full-width">
             <mat-select placeholder="Project" formControlName="projectId">
@@ -17,25 +17,11 @@
                 {{item.projectName}}
               </mat-option>
             </mat-select>
-            <!-- <mat-error *ngIf="rfqForm.controls['companyId'].hasError('required')">
-              Vendor <strong>required</strong>
-            </mat-error> -->
           </mat-form-field>
           <!-- <button (click)="manageCompany()"
           class="material-icons" style=" color: rgb(10, 111, 189); font-size: 25px; margin-right: 3px;">edit_note
            </button> -->
         </div>
-
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Task description" formControlName="description">
-            <!-- <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
-              Name <strong>required</strong>
-            </mat-error> -->
-          </mat-form-field>
-        </div>
-        </div>
-        <div class="row">
 
         <div class="col">
           <mat-form-field class="full-width">
@@ -47,15 +33,14 @@
           </mat-form-field>
         </div>
 
-        <div class="col">
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Assigned Trainee" formControlName="traineeId">
-              <mat-option *ngFor="let item of trainees" [value]="item.id">
-                {{item.name | titlecase}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
         </div>
+
+        <div class="row box">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Task description" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
 
         <!-- <div class="col">
           <mat-form-field class="full-width">
@@ -71,7 +56,7 @@
 
 
 
-      <div class="row">
+      <div class="row box">
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Deadline: choose a date</mat-label>
@@ -84,10 +69,7 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput placeholder="Remarks" formControlName="remarks">
-          <!-- <mat-error *ngIf="taskForm.controls['Remarks'].hasError('required')">
-            Name <strong>required</strong>
-          </mat-error> -->
+          <textarea matInput placeholder="Remarks" formControlName="remarks"></textarea>
         </mat-form-field>
       </div>
 

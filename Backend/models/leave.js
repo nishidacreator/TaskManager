@@ -14,7 +14,6 @@ const Leave = sequelize.define('leave',{
     freezeTableName: true
 })
 
-console.log(Leave === sequelize.models.leave);
 
 module.exports = Leave;
 
