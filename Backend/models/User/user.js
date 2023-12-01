@@ -8,10 +8,10 @@ const User = sequelize.define('user', {
   email: {type: DataTypes.STRING, allowNull : false},
   password: {type: DataTypes.STRING, allowNull : false},
   roleId: {type: DataTypes.INTEGER, allowNull : false},
-  status: {type: DataTypes.BOOLEAN, allowNull : false},
+  status: {type: DataTypes.BOOLEAN, allowNull : false, defaultValue: false},
   qualification: {type: DataTypes.STRING},
-  joiningDate: {type: DataTypes.DATEONLY, default: new Date},
-  employeeId: {type: DataTypes.STRING, allowNull :false},
+  joiningDate: {type: DataTypes.DATEONLY, defaultValue: new Date},
+  employeeId: {type: DataTypes.STRING},
   dateOfBirth: {type: DataTypes.DATEONLY}
 },
 {
