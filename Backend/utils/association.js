@@ -1,5 +1,7 @@
 const sequelize = require('./db');
 const { JSON } = require('sequelize');
+const bcrypt = require('bcrypt');
+
 const Role = require('../models/User/role');
 const User = require('../models/User/user');
 const Attendance = require('../models/User/attendance');
@@ -85,6 +87,15 @@ async function syncModel(){
             {roleName : 'Admin', status: true},
             {roleName : 'Employee', status: true},
             {roleName : 'Trainee', status: false}
+        ])
+    }
+
+    const user = await User.findAll({})
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash('123456', salt)
+    if(user.length === 0){
+        User.bulkCreate([
+            {name : 'Admin', phoneNumber: '1234567890', email: 'admin@gmail.com', password: hashedPassword, roleId: 1}
         ])
     }
 
