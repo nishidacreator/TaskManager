@@ -45,10 +45,7 @@ export class UserComponent {
   generateEmployeeId() {
     this.userSub = this.authService.getUser().subscribe((res)=>{
       this.employees = res
-      console.log(this.employees)
-
-       // Check if there are any employees in the array
-      console.log(this.employees)
+      
       if (this.employees.length > 0) {
         const maxId = this.employees.reduce((prevMax, emp) => {
           // Extract the numeric part of the employee ID and convert it to a number

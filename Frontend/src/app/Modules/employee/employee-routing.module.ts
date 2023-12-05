@@ -17,7 +17,7 @@ const routes: Routes = [
       {path: '', component: HomeComponent},
       {path:'addticket',component:TicketSystemComponent},
       {path:'leave',component:LeaveManagementComponent},
-   
+
 
       {path: 'viewAssignedTask', component: ViewAssignedTaskComponent },
 

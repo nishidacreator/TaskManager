@@ -4,8 +4,8 @@
 
 
 <!-- ------------------------------------------------------------------------------------------------- -->
-<mat-card>
-  <mat-card-header><mat-card-title>DAILY REPORT</mat-card-title></mat-card-header><br>
+<mat-card *ngIf="task">
+  <mat-card-header><mat-card-title>DAILY REPORT({{task.description}})</mat-card-title></mat-card-header><br>
 
   <mat-card-content>
     <table mat-table *ngIf="dailyReports.length != 0" [dataSource]="dailyReports" class="mat-elevation-z8">

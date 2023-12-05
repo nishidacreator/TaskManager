@@ -30,6 +30,7 @@ export class ViewAttendanceComponent {
   getUsers(){
     this.userSub = this.authService.getUser().subscribe((res)=>{
       this.users = res;
+      console.log(this.users);
       this.filteredOptions = this.users
     })
   }

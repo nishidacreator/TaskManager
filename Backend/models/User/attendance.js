@@ -3,8 +3,9 @@ const sequelize = require('../../utils/db');
 
 const Attendance = sequelize.define('attendance',{
     userId : {type : DataTypes.INTEGER, allowNull : true},
-    type : {type : DataTypes.STRING},
     dateTime : {type : DataTypes.DATE, allowNull : false},
+    type : {type : DataTypes.STRING},
+    // totalHours : {type : DataTypes.FLOAT},
     traineeId : {type : DataTypes.INTEGER, allowNull : true}
 },
 {
