@@ -22,15 +22,31 @@
       </div>
     </div>
 
-    <div class="data-info data-info--light">
-      <h6 class="data-info__heading"*ngIf="mode === 'determinate'">Progress bar </h6>
+    <!-- <div class="data-info data-info--light" style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+      <h6 class="data-info__heading" *ngIf="mode === 'determinate'" style="color: #333; font-size: 18px; margin-bottom: 10px;">Tickets</h6>
+      
+      <p style="margin-bottom: 5px;">Opened: <span style="font-weight: bold; color: #4CAF50;">{{ openTicketsCount }}</span></p>
+      
+      <p style="margin-bottom: 5px;">Closed: <span style="font-weight: bold; color: #f44336;">{{ closedTicketsCount }}</span></p>
+  </div> -->
+  
+  <div class="data-info data-info--light" style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <h6 class="data-info__heading" *ngIf="mode === 'determinate'" style="color: #333; font-size: 18px; margin-bottom: 10px;">Tickets</h6>
+    
+    <p style="margin-bottom: 5px;">
+        <span style="display: inline-block; margin-right: 10px;">Opened: <span style="font-weight: bold; color: #4CAF50;">{{ openTicketsCount }}</span></span>
+        <span>Closed: <span style="font-weight: bold; color: #f44336;">{{ closedTicketsCount }}</span></span>
+    </p>
+</div>
 
-        <mat-slider class="example-margin"  [min]="0" [max]="totalTasks" [(ngModel)]="completedTasks">
+  
+    
+        <!-- <mat-slider class="example-margin"  [min]="0" [max]="totalTasks" [(ngModel)]="completedTasks">
 
-        </mat-slider>
+        </mat-slider> -->
 
-      <div class="data-info__tag">{{progressPercentage}} %</div>
-    </div>
+      <!-- <div class="data-info__tag">{{progressPercentage}} %</div> -->
+
 
     <div class="data-info data-info--light">
       <h6 class="data-info__heading">{{ currentDay }}</h6>
