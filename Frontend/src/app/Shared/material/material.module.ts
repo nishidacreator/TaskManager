@@ -19,7 +19,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [],
   imports: [
@@ -41,7 +41,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatNativeDateModule,
     MatStepperModule,
     CdkAccordionModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   exports: [
     MatFormFieldModule,
@@ -61,7 +62,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatNativeDateModule,
     MatStepperModule,
     CdkAccordionModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

@@ -17,9 +17,10 @@ const routes: Routes = [
       {path: '', component: HomeComponent},
       {path:'addticket',component:TicketSystemComponent},
       {path:'leave',component:LeaveManagementComponent},
-   
+
 
       {path: 'viewAssignedTask', component: ViewAssignedTaskComponent },
+      {path: 'viewResponse/:id', component: ViewTicketResponseComponent },
 
       {path: 'myprofile/:id', component:UserDetailsComponent},
       {path: 'settings/edituser/:id', component:EditUserComponent},

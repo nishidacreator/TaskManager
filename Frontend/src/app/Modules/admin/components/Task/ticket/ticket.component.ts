@@ -46,7 +46,7 @@ export class TicketComponent {
   responseToComment(id : number){
     console.log(id)
     let data ={
-      status:'Completed',
+      status:'Responded',
     }
     console.log(data)
     this.adminService.updateTicketStatus(data,id).subscribe((res)=>{
