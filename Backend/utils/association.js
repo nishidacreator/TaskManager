@@ -97,8 +97,69 @@ async function syncModel(){
     if(user.length === 0){
         User.bulkCreate([
             {name : 'Admin', phoneNumber: '1234567890', email: 'admin@gmail.com', password: hashedPassword, roleId: 1},
-            {name : 'Admin', phoneNumber: '1234567890', email: 'admin@gmail.com', password: adminPassword, roleId: 1}
+            {name : 'amina', phoneNumber: '1134567890', email: 'amina@gmail.com', password: hashedPassword, roleId: 2},
+            {name : 'nishida', phoneNumber: '1114567890', email: 'nishida@gmail.com', password: hashedPassword, roleId: 2},
+            {name : 'anu', phoneNumber: '1114567890', email: 'anu@gmail.com', password: hashedPassword, roleId: 2}
         ])
+    }
+    const client = await Client.findAll({})
+    if(client.length === 0){
+        Client.bulkCreate([
+            {clientName : 'Shibin', email: "shibin@gmail.com", mob: 9847391646},
+            {clientName : 'Hafiz', email: "hafiz@gmail.com", mob: 9857391646}
+           
+        ])
+    }
+    const project = await Project.findAll({})
+    if(project.length === 0){
+        Project.bulkCreate([
+            {
+                projectName:'INARA',
+                clientId:2,
+                description: 'Therapy center',
+                startDate:'2023-12-09',
+                endDate:'2023-12-09',
+                deadline:'2023-12-09',
+                frontend: 'Angular',
+                backend: 'node js',
+                database: 'postgres',
+                status: 'on progress',
+                remarks: 'Immediate'
+            }, {
+                projectName:'WAC',
+                clientId:1,
+                description: 'Airlines ERP',
+                startDate:'2023-12-09',
+                endDate:'2023-12-09',
+                deadline:'2023-12-09',
+                frontend: 'Angular',
+                backend: 'node js',
+                database: 'postgres',
+                status: 'on progress',
+                remarks: 'Immediate'
+            },
+          
+        ])
+
+
+    }
+    const task = await Task.findAll({})
+    if(task.length === 0){
+        Task.bulkCreate([
+            {
+                projectId: 1,
+                description: 'Admin module',
+                assignedBy: 1,
+                assignedTo:2,
+                assignedOn:'2023-12-09',
+                deadline:'2023-12-09',
+                status: 'assigned' ,
+                remarks: 'urgent'
+            }
+          
+        ])
+
+
     }
 
 

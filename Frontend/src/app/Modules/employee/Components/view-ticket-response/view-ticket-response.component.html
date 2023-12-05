@@ -1,15 +1,27 @@
-
-<mat-card class="comment-card" *ngFor="let comment of comments; let i = index">
-  <mat-card-header>
+<form [formGroup]="ticketForm" (ngSubmit)="submitForm()">
+  <mat-card class="comment-card">
+    <mat-card-header>
       <mat-card-title>Responses for your Ticket</mat-card-title>
-  </mat-card-header>
-  <br>
-  <br>
-  <div class="comment-header">
-      <span class="comment-content">Comment: {{ comment.comment}}</span>
-      <span class="comment-date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
-  </div>
-  <div class="commented-by">CommentedBy : {{ comment.commentedBy }}</div>
-</mat-card>
-<br>
-<br>
+    </mat-card-header>
+    <br>
+    <br>
+
+    <div *ngFor="let comment of comments; let i = index">
+      <div class="comment-header">
+        <span class="comment-content">Comment: {{ comment.comment }}</span>
+        <span class="comment-date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
+      </div>
+      <div class="commented-by">CommentedBy: {{ comment.commentedBy }}</div>
+    </div>
+
+
+    <mat-checkbox formControlName="taskcompleted" (change)="onCheckboxChange()">Mark Ticket as Completed</mat-checkbox>
+
+    <div *ngIf="ticketForm.get('taskcompleted')?.value">
+      <mat-form-field>
+        <textarea matInput formControlName="completionComment" placeholder="Add Comment"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+  </mat-card>
+</form>

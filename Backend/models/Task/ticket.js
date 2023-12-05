@@ -9,7 +9,10 @@ const Ticket = sequelize.define('ticket',{
     userId:{type:DataTypes.INTEGER, allowNull:true},
     traineeId:{type:DataTypes.INTEGER, allowNull:true},
     ticketNo: {type : DataTypes.STRING},
-    status: {type : DataTypes.STRING}
+    status: {type : DataTypes.STRING},
+    taskcompleted: {type : DataTypes.STRING},
+    completionComment: {type : DataTypes.STRING}
+
 },
 {
     freezeTableName: true

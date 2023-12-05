@@ -10,6 +10,8 @@ export interface Ticket{
    taskId:number;
    status:string;
    ticketNo:string;
+   taskcompleted: string;
+   completionComment: string;
 
 
   }

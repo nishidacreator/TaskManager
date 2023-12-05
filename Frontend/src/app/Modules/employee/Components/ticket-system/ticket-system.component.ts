@@ -25,6 +25,7 @@ export class TicketSystemComponent {
   currentUserId!:any;
   currentUser!: string;
   comments: TicketComment[] = [];
+  userSub: any;
 
   constructor(
     private empService: EmployeeService,
@@ -34,12 +35,14 @@ export class TicketSystemComponent {
     private route: ActivatedRoute,
     private router : Router,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
 
   ) {}
 
   userRole!: string
   ngOnInit(): void {
+    this.generateInvoiceNum();
     this.ticketForm = this.fb.group({
       title: ['', Validators.required], // Add appropriate validators
       description: ['', Validators.required], // Add appropriate validators
@@ -88,7 +91,7 @@ export class TicketSystemComponent {
       formData.append('userId', this.currentUserId);
     }
     formData.append('taskId',this.ticketForm.get('taskId')?.value);
-    formData.append('ticketNo',this.generateTicketNumber())
+    formData.append('ticketNo', this.ivNum);
     formData.append('status','Raised')
     formData.append('title', this.ticketForm.get('title')!.value);
     formData.append('description', this.ticketForm.get('description')!.value);
@@ -107,7 +110,7 @@ export class TicketSystemComponent {
     );
 
   }
-  tickets:any[]=[]
+
   getTickets(){
     this.adminService.getTickets().subscribe((res)=>{
       console.log(res)
@@ -141,7 +144,8 @@ export class TicketSystemComponent {
   // comment!: TicketComment;
 ticketId:any | undefined;
 // tickets: Tickett[]=[]
-editFunction(id : any){
+editPatchFunction(id : any){
+  console.log('id',id);
   this.isEdit = true
   this.ticketId = id;
   this.adminService.getTicketById(this.ticketId).subscribe((res)=>{
@@ -149,10 +153,10 @@ editFunction(id : any){
     console.log(tkt)
     //populate the object with the comment
     let file = tkt.file
-    let title = tkt.title.toString()
+    let title = tkt.title
     let description = tkt.description.toString()
     let userId= tkt.userId.toString()
-    let taskId = tkt.taskId.toString()
+    let taskId = tkt.taskId
 
     this.ticketForm.patchValue({
      file: file,
@@ -166,6 +170,25 @@ editFunction(id : any){
   })
 
 }
+editFunction(){
+  this.isEdit = false;
+ let data: any ={
+  file : this.ticketForm.get('file')?.value,
+  title : this.ticketForm.get('title')?.value,
+  description:this.ticketForm.get('description')?.value,
+  userId : this.ticketForm.get('userId')?.value,
+  taskId : this.ticketForm.get('taskId')?.value,
+
+
+  }
+
+  this.adminService.editTicket(data, this.ticketId).subscribe((res)=>{
+    this._snackBar.open("Task updated successfully...","" ,{duration:3000})
+    this.clearControls();
+  },(error=>{
+        alert(error.message)
+      }))
+}
 private generateTicketNumber(): string {
   // Implement your quotation number generation logic here
   const prefix = 'TCK'; // Prefix for the quotation number
@@ -178,13 +201,61 @@ private generateTicketNumber(): string {
   const quoteNumber = `${prefix}-${random}`;
   return quoteNumber;
 }
+  tickets:Ticket[] =[]
+ivNum: string = "";
+nextId!: any;
+prefix!: string;
+generateInvoiceNum() {
+  this.userSub = this.adminService.getTickets().subscribe((res) => {
+    this.tickets = res;
+    console.log(this.tickets);
+
+    // Check if there are any RFQs in the array
+    if (this.tickets.length > 0) {
+      const maxId = this.tickets.reduce((prevMax, ticket) => {
+        // Extract the numeric part of the quoteNumber and convert it to a number
+        const idNumber = parseInt(ticket.ticketNo.substring(3), 10);
+        console.log(idNumber);
+
+        this.prefix = this.extractLetters(ticket.ticketNo);
+
+        // Check if the extracted numeric part is a valid number
+        if (!isNaN(idNumber)) {
+          return idNumber > prevMax ? idNumber : prevMax;
+        } else {
+          return prevMax;
+        }
+      }, 0);
+
+      // Increment the maxId by 1 to get the next ID
+      this.nextId = maxId + 1;
+    } else {
+      // If there are no RFQs in the array, set the nextId to 1
+      this.nextId = 1;
+      this.prefix = "TT";
+    }
+    console.log(this.nextId + "hih");
+
+    // Ensure that the numeric part is padded with leading zeros
+    const paddedId = `${this.prefix}${this.nextId
+      .toString()
+      .padStart(3, "0")}`;
+
+    this.ivNum = paddedId;
+    this.ticketForm.get("ticketNo")?.setValue(this.ivNum);
+  });
+}
+extractLetters(input: string): string {
+  return input.replace(/[^a-zA-Z]/g, "");
+}
 
 edit(){
 this._snackbar.open("Comment  updated successfully...","" ,{duration:3000})
 this.isEdit= true
 let data ={
   ticket : this.ticketForm.get('ticket')?.value,
-//  file : this.ticketForm.get('file'),
+ file : this.ticketForm.get('file')?.value,
+ title: this.ticketForm.get('title')?.value,
  description : this.ticketForm.get('description')?.value,
  taskId : this.ticketForm.get('taskId')?.value
 }

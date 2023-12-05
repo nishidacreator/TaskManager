@@ -8,6 +8,7 @@ import { TokenInterceptor } from './Shared/Interceptor/token.interceptor';
 import { DeleteComponent } from './Shared/delete/delete.component';
 import { LogoutComponent } from './Shared/logout/logout.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ReactiveFormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
