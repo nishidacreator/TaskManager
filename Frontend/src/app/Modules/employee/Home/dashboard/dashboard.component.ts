@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/Modules/auth/auth.service';
 
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Task } from 'src/app/Modules/admin/Models/task';
+import { Ticket } from 'src/app/Modules/admin/Models/ticket';
 
 
 
@@ -58,6 +59,7 @@ export class DashboardComponent {
       })
   }
   ngOnInit() {
+    this.getTickets()
 
     this.getDashboardBoxValues()
     this.getCurrentDateAndMonth()
@@ -92,8 +94,8 @@ export class DashboardComponent {
       const totalPendingTask = this.tasks.filter((item: Task) => item.status === 'assigned');
       this.completedTaskCount = totalCompletedTask.length
       this.assignedTaskCount = totalPendingTask.length
-      console.log(this.completedTaskCount)
-      console.log(this.assignedTaskCount)
+      // console.log(this.completedTaskCount)
+      // console.log(this.assignedTaskCount)
     })
 
     this.adminService.getProject().subscribe((res) => {
@@ -105,20 +107,7 @@ export class DashboardComponent {
       this.tickets = res
       this.ticketsCount = res.length
     })
-    console.log(this.assignedTaskCount)
-    console.log(this.completedTaskCount)
-    this.totalTasks = this.assignedTaskCount + this.completedTaskCount;
-    console.log(this.totalTasks)
 
-    if (this.totalTasks === 0) {
-      return 0;
-    }
-
-    if (this.completedTaskCount === 0) {
-      return 0; // or return a special value indicating no progress
-    }
-
-    return (this.totalTasks / this.completedTaskCount) * 100;
 
   }
 
@@ -182,4 +171,22 @@ progressPercentage: number = 0;
 //   this.cdr.detectChanges();
 // }
 
+  openTickets: any;
+ closedTickets : any
+ openTicketsCount:any
+ closedTicketsCount : any
+
+getTickets(){
+  this.adminService.getTickets().subscribe((res) => {
+    console.log(res)
+    this.openTickets = res.filter((x) => x.status === 'Raised'); // Corrected status check
+    this.openTicketsCount = this.openTickets.length; // Store the count in a separate variable
+  });
+
+  this.adminService.getTickets().subscribe((res) => {
+    this.closedTickets = res.filter((x) => x.status === 'Completed'); // Corrected status check
+    this.closedTicketsCount = this.closedTickets.length; // Store the count in a separate variable
+  });
+
+}
 }

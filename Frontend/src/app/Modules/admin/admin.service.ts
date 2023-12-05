@@ -109,6 +109,7 @@ export class AdminService {
     return this._http.patch<Task>(this.url+'/task/'+id, data);
   }
 
+
   deleteTask(id:String){
     return this._http.delete(this.url+'/task/'+id);
   }
@@ -249,6 +250,9 @@ export class AdminService {
   getTicketById(id:number):Observable<Ticket>{
     return this._http.get<Ticket>(this.url+'/tickets/'+id)
    }
+editTicket(data:any, id:any):Observable<Ticket>{
+  return this._http.patch<Ticket>(this.url+'/tickets/'+id, data);
+}
 
 updateTicketStatus(data:any, id:any):Observable<Task>{
   return this._http.patch<Task>(this.url+'/tickets/statusupdate/'+id, data);

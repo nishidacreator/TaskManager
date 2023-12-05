@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Leave } from './Model/leave';
+import { Ticket } from '../admin/Models/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +34,8 @@ export class EmployeeService {
   deleteLeave(id: number){
     return this._http.delete(this.url+'/leave/'+id);
   }
+UpdateTicketCompltComment(data : any, id : any ):Observable<Ticket>{
+  console.log('idddddd',data)
+  return this._http.patch<Ticket>(this.url + '/tickets/updateTicketCompltComment/'+id, data)
+}
 }

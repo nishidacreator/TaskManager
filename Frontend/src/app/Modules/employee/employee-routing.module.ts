@@ -20,6 +20,7 @@ const routes: Routes = [
 
 
       {path: 'viewAssignedTask', component: ViewAssignedTaskComponent },
+      {path: 'viewResponse/:id', component: ViewTicketResponseComponent },
 
       {path: 'myprofile/:id', component:UserDetailsComponent},
       {path: 'settings/edituser/:id', component:EditUserComponent},

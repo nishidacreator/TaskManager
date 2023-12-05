@@ -11,7 +11,6 @@ import { LeaveManagementComponent } from './Components/leave-management/leave-ma
 import { ViewTicketResponseComponent } from './Components/view-ticket-response/view-ticket-response.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -26,9 +25,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     EmployeeRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule,
     MatProgressBarModule,
-    MatSliderModule
+    MatSliderModule,
+    ReactiveFormsModule,
   ]
 })
 export class EmployeeModule { }

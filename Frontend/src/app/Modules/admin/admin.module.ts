@@ -78,12 +78,20 @@ import { TicketCommentComponent } from './components/Task/ticket-comment/ticket-
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+
+
+    AdminRoutingModule,
+
     FullCalendarModule,
-    PdfViewerModule
+    PdfViewerModule,
+
+
+
+
+
   ],
   providers: [
     DatePipe
