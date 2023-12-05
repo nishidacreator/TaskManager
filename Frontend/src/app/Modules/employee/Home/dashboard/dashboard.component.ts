@@ -107,20 +107,7 @@ export class DashboardComponent {
       this.tickets = res
       this.ticketsCount = res.length
     })
-    console.log(this.assignedTaskCount)
-    console.log(this.completedTaskCount)
-    this.totalTasks = this.assignedTaskCount + this.completedTaskCount;
-    console.log(this.totalTasks)
 
-    if (this.totalTasks === 0) {
-      return 0;
-    }
-
-    if (this.completedTaskCount === 0) {
-      return 0; // or return a special value indicating no progress
-    }
-
-    return (this.totalTasks / this.completedTaskCount) * 100;
 
   }
 
@@ -195,11 +182,11 @@ getTickets(){
     this.openTickets = res.filter((x) => x.status === 'Raised'); // Corrected status check
     this.openTicketsCount = this.openTickets.length; // Store the count in a separate variable
   });
-  
+
   this.adminService.getTickets().subscribe((res) => {
     this.closedTickets = res.filter((x) => x.status === 'Completed'); // Corrected status check
     this.closedTicketsCount = this.closedTickets.length; // Store the count in a separate variable
   });
-  
+
 }
 }
