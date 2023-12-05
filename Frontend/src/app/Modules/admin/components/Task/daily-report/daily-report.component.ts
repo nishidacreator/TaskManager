@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DailyReport } from '../../../Models/dailyReport';
 import { DeleteComponent } from 'src/app/Shared/delete/delete.component';
+import { Task } from '../../../Models/task';
 
 @Component({
   selector: 'app-daily-report',
@@ -25,8 +26,8 @@ export class DailyReportComponent {
 
 
   ngOnInit(): void {
-this.getDailyReports()
-
+    this.getDailyReports()
+    this.getTaskById()
   }
   dailyReportForm = this.fb.group({
 
@@ -37,6 +38,12 @@ this.getDailyReports()
     date:['']
 });
 
+task!:Task
+getTaskById(){
+  this.adminService.getTaskById(this.route.snapshot.params['id']).subscribe(data=>{
+    this.task = data
+  })
+}
 
 
 dailyReports: DailyReport[] = [];

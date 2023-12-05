@@ -58,16 +58,17 @@ export class LoginComponent {
               let data = {
                 userId: user.id,
                 type: 'LogIn',
-                dateTime:  new Date()
+                dateTime: new Date()
               }
               console.log(data)
               this.authService.addAttendance(data).subscribe((res)=>{
+                console.log(res)
                 this._snackBar.open("Attendance added successfully...","" ,{duration:3000})
               })
             }
-            else(
-              alert("Attendance is already marked")
-            )
+            // else(
+            //   alert("Attendance is already marked")
+            // )
           })
         }
         else{
@@ -92,16 +93,16 @@ export class LoginComponent {
                 this._snackBar.open("Attendance added successfully...","" ,{duration:3000})
               })
             }
-            else(
-              alert("Attendance is already marked")
-            )
+            // else(
+            //   alert("Attendance is already marked")
+            // )
           })
         }
         this.router.navigate([role]);
       })
       // alert("Welcome" + user.name)
-    }
-  }
+    }
+  }
 
   // setCurrentUser(){
   //   if(localStorage.getItem('token')){

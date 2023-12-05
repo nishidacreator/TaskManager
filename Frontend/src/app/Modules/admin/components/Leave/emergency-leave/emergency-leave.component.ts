@@ -6,6 +6,8 @@ import { Leave } from 'src/app/Modules/employee/Model/leave';
 import { EmployeeService } from 'src/app/Modules/employee/employee.service';
 import { DeleteComponent } from 'src/app/Shared/delete/delete.component';
 import { AdminService } from '../../../admin.service';
+import { AuthService } from 'src/app/Modules/auth/auth.service';
+import { User } from 'src/app/Modules/auth/Model/user';
 
 @Component({
   selector: 'app-emergency-leave',
@@ -15,7 +17,7 @@ import { AdminService } from '../../../admin.service';
 export class EmergencyLeaveComponent {
   userId!: number
   constructor(private formBuilder: FormBuilder, private empService: EmployeeService, private adminService: AdminService,
-    private _snackBar: MatSnackBar, private dialog: MatDialog,
+    private _snackBar: MatSnackBar, private dialog: MatDialog, private authService: AuthService,
     public dialogRef: MatDialogRef<EmergencyLeaveComponent>,
      @Inject(MAT_DIALOG_DATA) public data: any)
       {
@@ -30,9 +32,7 @@ export class EmergencyLeaveComponent {
 
   ngOnInit() {
     this.getLeave()
-
-    console.log(this.data.status)
-    console.log(this.data.id)
+    this.getUsers()
   }
 
     leaveRequestForm= this.formBuilder.group({
@@ -43,10 +43,17 @@ export class EmergencyLeaveComponent {
     }
   )
 
+  users: User[] = [];
+  getUsers(){
+    this.authService.getUser().subscribe(u=>{
+        this.users = u;
+    })
+  }
+
   leave!: any
   submitForm() {
     let data = {
-      userId: this.userId,
+      userId: this.leaveRequestForm.get('userId')?.value,
       reason: this.leaveRequestForm.get('reason')?.value,
       fromDate: this.leaveRequestForm.get('fromDate')?.value,
       toDate: this.leaveRequestForm.get('toDate')?.value,
@@ -80,11 +87,13 @@ export class EmergencyLeaveComponent {
           let fromDate:any = leave.fromDate
           let toDate: any = leave.toDate
           let reason = leave.reason
+          let userId: any = leave.userId
 
           this.leaveRequestForm.patchValue({
             fromDate: fromDate,
             toDate: toDate,
-            reason: reason
+            reason: reason,
+            userId: userId
           })
         })
       }
@@ -94,7 +103,7 @@ export class EmergencyLeaveComponent {
   editFunction(){
     this.data.status = false;
     let data = {
-      userId: this.userId,
+      userId: this.leaveRequestForm.get('userId')?.value,
       reason: this.leaveRequestForm.get('reason')?.value,
       fromDate: this.leaveRequestForm.get('fromDate')?.value,
       toDate: this.leaveRequestForm.get('toDate')?.value,
@@ -112,5 +121,8 @@ export class EmergencyLeaveComponent {
         }))
   }
 
+  cancel(){
+    this.dialogRef.close();
+  }
 }
 

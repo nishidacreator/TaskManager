@@ -71,9 +71,10 @@ export class LeaveManagementComponent {
     console.log(this.data)
     this.empService.addLeave(this.data).subscribe((res)=>{
       console.log(res)
+      this.clearControls()
+      this.getLeave()
     })
-    this.clearControls()
-    this.getLeave()
+
   }
 
   clearControls(){

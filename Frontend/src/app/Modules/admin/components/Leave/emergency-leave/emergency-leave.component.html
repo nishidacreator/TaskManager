@@ -3,8 +3,31 @@
   <mat-card class="background">
     <mat-card-content>
 
-      <div class="row">
 
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-select placeholder="User" formControlName="userId">
+              <mat-option *ngFor="let item of users" [value]="item.id">
+                {{item.name | titlecase}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field appearance="fill">
+              <mat-label>Reason</mat-label>
+              <textarea matInput formControlName="reason" placeholder="Enter reason"></textarea>
+              <!-- <mat-error *ngIf="leaveRequestForm.get('reason').hasError('required')">
+                Reason is required
+              </mat-error> -->
+            </mat-form-field>
+          </div>
+      </div>
+
+
+      <div class="row">
         <div class="col">
           <mat-form-field appearance="fill">
               <mat-label>Start Date</mat-label>
@@ -22,29 +45,12 @@
               <mat-datepicker #endDatePicker></mat-datepicker>
             </mat-form-field>
         </div>
-
-
       </div>
-
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="fill">
-              <mat-label>Reason</mat-label>
-              <textarea matInput formControlName="reason" placeholder="Enter reason"></textarea>
-              <!-- <mat-error *ngIf="leaveRequestForm.get('reason').hasError('required')">
-                Reason is required
-              </mat-error> -->
-            </mat-form-field>
-
-          </div>
-
-
-      </div>
-
 
 
       <mat-card-actions>
         <button *ngIf="!data.status" mat-raised-button (click)="submitForm()" [disabled]="!leaveRequestForm.valid">ADD</button>&nbsp;&nbsp;
+        <button *ngIf="!data.status" mat-raised-button (click)="cancel()" [disabled]="!leaveRequestForm.valid">CANCEL</button>&nbsp;&nbsp;
         <button *ngIf="data.status" mat-raised-button type="button" [disabled]="!leaveRequestForm.valid" (click)="editFunction()">UPDATE</button>&nbsp;&nbsp;
       </mat-card-actions>
     </mat-card-content>
