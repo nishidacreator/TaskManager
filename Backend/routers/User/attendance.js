@@ -6,9 +6,9 @@ const Trainee = require('../../models/Trainee/trainee');
 
 router.post('/', async (req, res) => {
     try {
-            const { userId, type, dateTime, traineeId} = req.body;
+            const { userId, type, dateTime} = req.body;
 
-            const result = new Attendance({userId, type, dateTime, traineeId});
+            const result = new Attendance({userId, type, dateTime});
 
             await result.save();
 

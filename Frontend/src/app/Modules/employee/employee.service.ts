@@ -10,7 +10,8 @@ import { Ticket } from '../admin/Models/ticket';
 
 export class EmployeeService {
 
-  url = 'http://localhost:8000';
+  // url = 'http://localhost:8000';
+  url = 'https://api.carvingsoft.com'
 
   constructor(private _http:HttpClient) { }
 
