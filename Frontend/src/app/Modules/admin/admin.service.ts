@@ -19,8 +19,8 @@ import { TicketComment } from './Models/ticketComment';
 })
 export class AdminService {
 
-  url = 'http://localhost:8000'
-
+  // url = 'http://localhost:8000'
+  url = 'https://api.carvingsoft.com'
   constructor(private _http:HttpClient) { }
 
 

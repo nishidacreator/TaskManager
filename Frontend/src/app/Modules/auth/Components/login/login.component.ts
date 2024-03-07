@@ -40,6 +40,8 @@ export class LoginComponent {
       let roleid = user.role
 
       this.authService.getRoleById(roleid).subscribe((res)=>{
+        console.log(res);
+
         let role = res.roleName.toLowerCase();
         console.log(role);
 

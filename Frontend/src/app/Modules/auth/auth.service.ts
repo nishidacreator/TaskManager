@@ -14,6 +14,7 @@ import { Attendance } from './Model/attendance';
 export class AuthService {
 
   url = 'http://localhost:8000'
+  // url = 'https://api.carvingsoft.com'
 
   private readonly token = 'token'
   private readonly JWT_TOKEN = 'JWT_TOKEN';
