@@ -55,7 +55,7 @@ router.post('/',  async (req, res) => {
 })
 
 
-router.get('/', authToken,async(req,res)=>{
+router.get('/',async(req,res)=>{
 
     try {
         const result = await Trainee.findAll({include: Role, order: ['id']});
@@ -66,7 +66,7 @@ router.get('/', authToken,async(req,res)=>{
     }  
 })
 
-router.get('/:id', authToken, async(req,res)=>{
+router.get('/:id',  async(req,res)=>{
     try {
         console.log(req.params.id)
         const result = await Trainee.findOne({
@@ -78,7 +78,7 @@ router.get('/:id', authToken, async(req,res)=>{
     }
 })
 
-router.patch('/:id', authToken, async(req,res)=>{
+router.patch('/:id',  async(req,res)=>{
     try {
         const { name,email,phoneNumber,qualification,experience,languagesKnown,trainingPeriod,trainingMode,
           startDate,endDate,traineeID, status, password, roleId, dateOfBirth} = req.body;
@@ -110,7 +110,7 @@ router.patch('/:id', authToken, async(req,res)=>{
       }
 })
 
-router.patch('/status/:id', authToken, async(req,res)=>{
+router.patch('/status/:id',  async(req,res)=>{
   try {
     const trainee = {
         traineeID: req.body.traineeID,
