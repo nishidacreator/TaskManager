@@ -92,8 +92,8 @@ async function syncModel(){
 
     const user = await User.findAll({})
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash('123456', salt)
-    const  adminPassword = await bcrypt.hash('admin',salt)
+    const hashedPassword = await bcrypt.hash('admin', salt)
+
     if(user.length === 0){
         User.bulkCreate([
             {name : 'Admin', phoneNumber: '1234567890', email: 'admin@gmail.com', password: hashedPassword, roleId: 1},
