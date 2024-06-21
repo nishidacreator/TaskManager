@@ -15,7 +15,7 @@ import { LogoutComponent } from 'src/app/Shared/logout/logout.component';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  isExpanded : boolean = false;
+  isExpanded : boolean = true;
 
   userName: string
   userId!: number
