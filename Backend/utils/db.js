@@ -1,9 +1,8 @@
-const {Sequelize} = require('sequelize')
+const Sequelize = require('sequelize');
 
-
-const sequelize = new Sequelize('task_db', 'task', 'task', {
+const sequelize = new Sequelize('wac_db', 'wac', 'Wac@Jan2023', {
     host: 'localhost',
-    dialect: 'postgres' 
+    dialect: 'postgres'
 });
 
   

@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: '', component:NavbarComponent,
     children:[
       {path: 'home', component: DashboardComponent},
-      {path: '', component:HomeComponent},
+      {path: '', component:DashboardComponent},
       {path: 'settings', component:SettingsComponent},
       {path: 'settings/userdetails/:id', component:UserDetailsComponent},
       {path: 'settings/adduser', component:UserComponent},
