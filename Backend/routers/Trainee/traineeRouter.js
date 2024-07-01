@@ -55,7 +55,7 @@ router.post('/',  async (req, res) => {
 })
 
 
-router.get('/', authToken,async(req,res)=>{
+router.get('/', authToken, async(req,res)=>{
 
     try {
         const result = await Trainee.findAll({include: Role, order: ['id']});

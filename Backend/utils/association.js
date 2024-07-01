@@ -17,7 +17,7 @@ const Minutes = require('../models/minutes');
 const MinuteDetails = require('../models/minuteDetails');
 async function syncModel(){
 
-    await sequelize.sync({force: true})
+    await sequelize.sync({alter: true})
 
     //RELATION
     Role.hasMany(User,{foreignKey : 'roleId', onDelete : 'CASCADE', onUpdate : 'CASCADE'})
